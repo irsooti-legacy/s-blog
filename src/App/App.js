@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from '../assets/logo.svg';
 import './App.css';
+import { connect } from 'react-redux';
+import { authenticateAsync } from '../store/sagas/auth';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.test()
+  }
   render() {
     return (
       <div className="App">
@@ -25,4 +30,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  test: () => authenticateAsync()
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);
