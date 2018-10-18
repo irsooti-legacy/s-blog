@@ -4,25 +4,30 @@ import { auth, commmon } from './reducers';
 
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
+import { authenticateAsync } from './sagas/auth';
 
 let composeEnhancers = compose;
 
 composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
+const sagaMiddleware = createSagaMiddleware();
 const rootReducer = combineReducers({
   common: commmon,
   auth: auth
 });
 
 const configureStore = () => {
-  return createStore(
+  const store = createStore(
     rootReducer,
     composeEnhancers(
       applyMiddleware(thunk),
       applyMiddleware(logger),
-      applyMiddleware(createSagaMiddleware())
+      applyMiddleware(sagaMiddleware)
     )
   );
+
+  sagaMiddleware.run(authenticateAsync);
+
+  return store;
 };
 
 export default configureStore;

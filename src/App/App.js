@@ -1,40 +1,35 @@
 import React, { Component } from 'react';
-import logo from '../assets/logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
-import { authenticateAsync } from '../store/sagas/auth';
+import { beginAuthentication } from '../store/actions/auth';
 
 class App extends Component {
   componentDidMount() {
-    this.props.test()
+    this.props.test({ email: 'irsooti@gmail.com', password: '' });
   }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div
+        onClick={() =>
+          this.props.test({ email: 'irsooti@gmail.com', password: '' })
+        }
+      >
+        {this.props.user.email}
       </div>
     );
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  test: () => authenticateAsync()
+  test: x => dispatch(beginAuthentication(x.email, x.password))
+});
+
+const mapStateToProps = state => ({
+  user: state.auth.user
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);
