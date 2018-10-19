@@ -20,8 +20,8 @@ const configureStore = () => {
     rootReducer,
     composeEnhancers(
       applyMiddleware(thunk),
-      applyMiddleware(logger),
-      applyMiddleware(sagaMiddleware)
+      applyMiddleware(sagaMiddleware),
+      applyMiddleware(logger)
     )
   );
 
