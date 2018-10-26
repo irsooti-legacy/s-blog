@@ -1,7 +1,8 @@
 import {
   AUTHENTICATION_FLOW,
   AUTHENTICATION_FAIL,
-  AUTHENTICATION_SUCCESS
+  AUTHENTICATION_SUCCESS,
+  AUTHENTICATION_PENDING
 } from './actionTypes';
 
 export const beginAuthentication = (email, password) => {
@@ -10,6 +11,15 @@ export const beginAuthentication = (email, password) => {
     payload: {
       email,
       password
+    }
+  };
+};
+
+export const setAuthenticationStatus = isPending => {
+  return {
+    type: AUTHENTICATION_PENDING,
+    payload: {
+      isPending
     }
   };
 };

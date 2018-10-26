@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateState } from '../../utils/data';
 
 const initialState = {
+  isPending: false,
   isAuthenticated: false,
   user: {}
 };
@@ -27,9 +28,10 @@ const reducer = (state = initialState, action) => {
       return updateState(state, {
         isAuthenticated: false
       });
-    default:
-      console.log(action.type);
 
+    case actionTypes.AUTHENTICATION_PENDING:
+      return updateState(state, { isPending: action.payload.isPending });
+    default:
       return state;
   }
 };

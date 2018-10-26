@@ -4,7 +4,7 @@ import { auth, commmon } from './reducers';
 
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import { authenticateAsync } from './sagas/auth';
+import { rootSaga } from './sagas';
 
 let composeEnhancers = compose;
 
@@ -15,17 +15,24 @@ const rootReducer = combineReducers({
   auth: auth
 });
 
+const myMiddleware = store => next => action => {
+  const result = next(action);
+  console.table(action);
+  return result;
+};
+
 const configureStore = () => {
   const store = createStore(
     rootReducer,
     composeEnhancers(
       applyMiddleware(thunk),
       applyMiddleware(sagaMiddleware),
-      applyMiddleware(logger)
+      applyMiddleware(logger),
+      applyMiddleware(myMiddleware)
     )
   );
 
-  sagaMiddleware.run(authenticateAsync);
+  sagaMiddleware.run(rootSaga);
 
   return store;
 };

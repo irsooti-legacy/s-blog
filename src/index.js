@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import './index.css';
-import App from './App/App';
+import 'bulma/css/bulma.css'
+import App from './containers/App/App';
 import * as serviceWorker from './utils/serviceWorker';
 import configureStore from './store/config';
 
