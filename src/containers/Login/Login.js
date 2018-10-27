@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { beginAuthentication } from '../../store/actions/auth';
 import { validateEmail } from '../../utils/common';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
   state = {
@@ -18,8 +19,10 @@ class Login extends Component {
     this.setState({ user: _state.user, pass: _state.pass });
   };
 
-  onAuthenticate = credentials => {
-    if (validateEmail(this.state.user)) this.props.authenticate(credentials);
+  onAuthenticate = () => {
+    const { user, pass } = this.state;
+    console.log(user, pass);
+    if (validateEmail(this.state.user)) this.props.authenticate(user, pass);
   };
 
   onEmailValidation = email => {
@@ -34,17 +37,19 @@ class Login extends Component {
 
   render() {
     let isAuthenticatingClasses = this.props.isPending ? 'is-loading' : '';
-    return (
+    let notAuthenticatedFragment = (
       <React.Fragment>
         <section class="hero is-primary">
           <div class="hero-body">
             <div class="container">
               <h1 class="title">Login</h1>
-              <h2 class="subtitle">Authenticate and <strong>start your stories</strong></h2>
+              <h2 class="subtitle">
+                Authenticate and <strong>start your stories</strong>
+              </h2>
             </div>
           </div>
         </section>
-        <div style={{marginTop: '1em'}} class="columns is-mobile">
+        <div style={{ marginTop: '1em' }} class="columns is-mobile">
           <div class="column is-4 is-offset-4">
             <div className="field">
               <p className="control has-icons-left has-icons-right">
@@ -95,16 +100,27 @@ class Login extends Component {
         </div>
       </React.Fragment>
     );
+    let authenticatedFragment = (
+      <Redirect
+        to={{
+          pathname: '/'
+        }}
+      />
+    );
+
+    return !this.props.isAuthenticated
+      ? notAuthenticatedFragment
+      : authenticatedFragment;
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  authenticate: credentials =>
-    dispatch(beginAuthentication(credentials.email, credentials.password))
+  authenticate: (user, pass) => dispatch(beginAuthentication(user, pass))
 });
 
 const mapStateToProps = state => ({
   user: state.auth.user,
+  isAuthenticated: state.auth.isAuthenticated,
   isPending: state.auth.isPending
 });
 

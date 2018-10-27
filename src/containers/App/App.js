@@ -6,6 +6,7 @@ import Toolbar from '../Toolbar/Toolbar';
 import Login from '../Login/Login';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import withAuthentication from '../../hoc/withAuthentication';
+import Home from '../Home/Home';
 
 class App extends Component {
   componentDidMount() {
@@ -18,7 +19,7 @@ class App extends Component {
       <Router>
         <div className={style.test}>
           <Toolbar />
-          <Route path="/" exact component={withAuthentication(Login)} />
+          <Route path="/" exact component={withAuthentication(Home)} />
           <Route path="/login" exact component={Login} />
           
         </div>
