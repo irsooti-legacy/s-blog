@@ -13,14 +13,14 @@ export function* addPostWorker(action) {
 
     let token = localStorage.getItem('token');
     let localId = localStorage.getItem('localId');
-
+    // const {text, title} = action.payload;
     console.log(token);
 
     let response = yield call(
       addNewPost,
       token,
       localId,
-      action.payload.newPost
+      action.payload
     );
 
     console.log(response);
