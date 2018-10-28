@@ -1,6 +1,6 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { auth, commmon } from './reducers';
+import { auth, commmon, posts } from './reducers';
 
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
@@ -12,14 +12,9 @@ composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const sagaMiddleware = createSagaMiddleware();
 const rootReducer = combineReducers({
   common: commmon,
-  auth: auth
+  auth: auth,
+  posts
 });
-
-const myMiddleware = store => next => action => {
-  const result = next(action);
-  console.table(action);
-  return result;
-};
 
 const configureStore = () => {
   const store = createStore(
@@ -27,8 +22,7 @@ const configureStore = () => {
     composeEnhancers(
       applyMiddleware(thunk),
       applyMiddleware(sagaMiddleware),
-      applyMiddleware(logger),
-      applyMiddleware(myMiddleware)
+      applyMiddleware(logger)
     )
   );
 

@@ -1,0 +1,14 @@
+.input-title {
+  border: none;
+  background: transparent;
+  font-size: inherit;
+  font-weight: bold
+}
+
+.input-title:focus {
+  outline: none
+}
+
+.new-post .ql-container.ql-snow {
+  min-height: 60vh;
+}

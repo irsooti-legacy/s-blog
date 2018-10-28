@@ -15,3 +15,20 @@ export const postAuthentication = (email, password) => {
       console.warn('Firebase auth failed', err);
     });
 };
+
+export const postVerifyToken = refreshToken => {
+  return axios
+    .post(
+      'https://securetoken.googleapis.com/v1/token?key=' + FIREBASE_API_KEY,
+      {
+        refresh_token: refreshToken,
+        grant_type: 'refresh_token'
+      }
+    )
+    .then(({ data }) => {
+      return data;
+    })
+    .catch(err => {
+      console.warn('Firebase re-auth failed', err)
+    });
+};

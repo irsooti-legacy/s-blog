@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 const withAuthentication = WrappedComponent => {
-  console.log(WrappedComponent)
   return class extends React.Component {
     IsNotAuthenticatedFragment = (
       <Redirect

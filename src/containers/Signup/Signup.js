@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { beginAuthentication } from '../../store/actions/auth';
 import { validateEmail } from '../../utils/common';
 import { Redirect } from 'react-router-dom';
+import { beginAuthentication } from '../../store/actions/auth';
 
-class Login extends Component {
+
+class Signup extends Component {
   state = {
     user: '',
     pass: '',
@@ -39,12 +40,12 @@ class Login extends Component {
     let isAuthenticatingClasses = this.props.isPending ? 'is-loading' : '';
     let notAuthenticatedFragment = (
       <React.Fragment>
-        <section class="hero is-medium is-primary">
+        <section class="hero is-medium is-info">
           <div class="hero-body">
             <div class="container">
-              <h1 class="title">Login</h1>
+              <h1 class="title">Sign up</h1>
               <h2 class="subtitle">
-                Authenticate and <strong>start your stories</strong>
+                Start <strong>your stories!</strong>
               </h2>
             </div>
           </div>
@@ -127,4 +128,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(Signup);

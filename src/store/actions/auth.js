@@ -1,13 +1,8 @@
-import {
-  AUTHENTICATION_FLOW,
-  AUTHENTICATION_FAIL,
-  AUTHENTICATION_SUCCESS,
-  AUTHENTICATION_PENDING
-} from './actionTypes';
+import * as actionTypes from './actionTypes';
 
 export const beginAuthentication = (email, password) => {
   return {
-    type: AUTHENTICATION_FLOW,
+    type: actionTypes.AUTHENTICATION_FLOW,
     payload: {
       email,
       password
@@ -17,7 +12,7 @@ export const beginAuthentication = (email, password) => {
 
 export const setAuthenticationStatus = isPending => {
   return {
-    type: AUTHENTICATION_PENDING,
+    type: actionTypes.AUTHENTICATION_PENDING,
     payload: {
       isPending
     }
@@ -26,15 +21,49 @@ export const setAuthenticationStatus = isPending => {
 
 export const authenticationFail = () => {
   return {
-    type: AUTHENTICATION_FAIL
+    type: actionTypes.AUTHENTICATION_FAIL
   };
 };
 
 export const authenticationSuccess = email => {
   return {
-    type: AUTHENTICATION_SUCCESS,
+    type: actionTypes.AUTHENTICATION_SUCCESS,
     payload: {
       user: { email }
     }
+  };
+};
+
+export const beginVerifyToken = token => {
+  return {
+    type: actionTypes.VERIFYING_TOKEN_FLOW,
+    payload: {
+      token
+    }
+  };
+};
+
+export const tokenIsVerifying = isVerifing => {
+  return {
+    type: actionTypes.VERIFYING_TOKEN_PENDING,
+    payload: {
+      isVerifing
+    }
+  };
+};
+
+export const tokenVerifiedSuccess = userInfo => {
+  return {
+    type: actionTypes.TOKEN_VALID,
+    payload: {
+      userInfo
+    }
+  };
+};
+
+export const tokenVerifiedFailure = (err = 'Generic error') => {
+  return {
+    type: actionTypes.TOKEN_INVALIDATE,
+    payload: { err }
   };
 };

@@ -1,3 +1,4 @@
-.test {
-    color: red;
+.navbar-item.is-active {
+    background-color: #fafafa;
+    color: #3273dc !important;
 }

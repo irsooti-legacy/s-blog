@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class Toolbar extends Component {
+class Toolbar extends Component {
   state = {
     showMobileNavbar: false
   };
@@ -20,16 +21,21 @@ export default class Toolbar extends Component {
     }
   };
 
+  componentDidUpdate() {
+    console.log(this.props.match)
+  }
+
   render() {
+    const { match } = this.props;
+    console.log(match);
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <a className="navbar-item" href="https://bulma.io">
-            <span>Exp</span>
+            <span className="is-bold">SBLOG</span>
           </a>
 
-          <a
-            role="button"
+          <div
             className={`navbar-burger burger ${this.isBurgerBarFocused()}`}
             aria-label="menu"
             aria-expanded="false"
@@ -39,7 +45,7 @@ export default class Toolbar extends Component {
             <span aria-hidden="true" />
             <span aria-hidden="true" />
             <span aria-hidden="true" />
-          </a>
+          </div>
         </div>
 
         <div
@@ -47,34 +53,62 @@ export default class Toolbar extends Component {
           className={`navbar-menu ${this.isBurgerBarFocused()}`}
         >
           <div className="navbar-start">
-            <a className="navbar-item">Home</a>
-
-            <a className="navbar-item">Documentation</a>
-
-            <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link">More</a>
-              <div class="navbar-dropdown">
-                <Link className="navbar-item" to="/login">
-                  Home
-                </Link>
-              </div>
-            </div>
+            <NavLink
+              className="navbar-item"
+              activeClassName="is-active"
+              exact 
+              to="/"
+            >
+              Home
+            </NavLink>
+            {this.props.user.email !== undefined ? (
+              <NavLink
+                className="navbar-item"
+                activeClassName="is-active"
+                to="/newpost"
+              >
+                New post
+              </NavLink>
+            ) : null}
           </div>
 
-          <div className="navbar-end">
-            <div className="navbar-item">
-              <div className="buttons">
-                <a href="#" className="button is-primary">
-                  <strong>Sign up</strong>
-                </a>
-                <Link className="button is-light" to="/login">
-                  Log in
-                </Link>
+          {this.props.user.email === undefined ? (
+            <div className="navbar-end">
+              <div className="navbar-item">
+                <div className="buttons">
+                  <Link to="/signup" className="button is-primary">
+                    <strong>Sign up</strong>
+                  </Link>
+                  <Link className="button is-light" to="/login">
+                    Log in
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="navbar-end">
+              <div className="navbar-item">
+                <div className="buttons">
+                  <button className="button is-primary">
+                    <span className="icon">
+                      <i className="fas fa-user" />
+                    </span>
+                    <span>{this.props.user.email}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(Toolbar));
