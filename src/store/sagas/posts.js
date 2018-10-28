@@ -2,9 +2,12 @@ import { put, call } from 'redux-saga/effects';
 import {
   addPostSuccessfully,
   addPostPendingStatus,
-  addPostFailure
+  addPostFailure,
+  retrievePostsIsPending,
+  retrievePostsFailure,
+  retrievePostsSuccess
 } from '../actions/posts';
-import { addNewPost } from '../../api/post';
+import { addNewPost, getAllPosts } from '../../api/post';
 
 export function* addPostWorker(action) {
   yield put(addPostPendingStatus(true));
@@ -16,12 +19,7 @@ export function* addPostWorker(action) {
     // const {text, title} = action.payload;
     console.log(token);
 
-    let response = yield call(
-      addNewPost,
-      token,
-      localId,
-      action.payload
-    );
+    let response = yield call(addNewPost, token, localId, action.payload);
 
     console.log(response);
 
@@ -30,5 +28,18 @@ export function* addPostWorker(action) {
     yield put(addPostFailure('Generic error ' + err));
   } finally {
     yield put(addPostPendingStatus(false));
+  }
+}
+
+export function* retrievePostsWorker() {
+  yield put(retrievePostsIsPending(true));
+
+  try {
+    let posts = yield call(getAllPosts);
+    yield put(retrievePostsSuccess(posts));
+  } catch (err) {
+    yield put(retrievePostsFailure(err));
+  } finally {
+    yield put(retrievePostsIsPending(false));
   }
 }

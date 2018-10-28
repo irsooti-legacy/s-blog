@@ -1,22 +1,14 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
-dotenv.load({ path: '../../' });
-
-const { API_ENDPOINT } = process.env;
-
-alert(API_ENDPOINT)
-
-//https://irsooti-e526d.firebaseio.com/
+import { FIREBASE_API_ENDPOINT } from '../const/api';
 
 export const addNewPost = (token, localId, post) => {
-  console.log(post);
   const config = {
     params: { auth: token }
   };
 
   return axios
     .post(
-      `https://sblog-175ab.firebaseio.com/posts/${localId}.json`,
+      `${FIREBASE_API_ENDPOINT}/posts/${localId}.json`,
       {
         post
       },
@@ -29,4 +21,11 @@ export const addNewPost = (token, localId, post) => {
       console.warn('Error at post ', err);
       return err;
     });
+};
+
+export const getAllPosts = () => {
+  return axios
+    .get(`${FIREBASE_API_ENDPOINT}/posts.json`)
+    .then(({ data }) => data)
+    .catch(err => err);
 };

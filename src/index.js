@@ -1,4 +1,5 @@
 import React from 'react';
+import dotenv from 'dotenv';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import './index.css';
@@ -8,6 +9,10 @@ import 'bulma/css/bulma.css';
 import App from './containers/App/App';
 import * as serviceWorker from './utils/serviceWorker';
 import configureStore from './store/config';
+
+dotenv.load();
+
+console.log(process.env);
 
 ReactDOM.render(
   <Provider store={configureStore()}>

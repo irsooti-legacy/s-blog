@@ -33,3 +33,36 @@ export const addPostPendingStatus = addingPostIsPending => {
     }
   };
 };
+
+export const retrievePostsFlow = () => {
+  return {
+    type: actionTypes.RETRIEVE_POSTS_FLOW
+  };
+};
+
+export const retrievePostsSuccess = posts => {
+  return {
+    type: actionTypes.RETRIEVE_POSTS_SUCCESS,
+    payload: {
+      posts
+    }
+  };
+};
+
+export const retrievePostsFailure = retrievePostsError => {
+  return {
+    type: actionTypes.RETRIEVE_POSTS_FAILURE,
+    payload: {
+      retrievePostsError
+    }
+  };
+};
+
+export const retrievePostsIsPending = isPending => {
+  return {
+    type: actionTypes.RETRIEVE_POSTS_PENDING_STATUS,
+    payload: {
+      isPending
+    }
+  };
+};

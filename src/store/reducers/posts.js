@@ -3,8 +3,10 @@ import { updateState } from '../../utils/data';
 
 const initialState = {
   addingPostIsPending: false,
+  retrievePostsIsPending: false,
   postIdRetrieved: null,
-  retrievePostError: ''
+  retrievePostError: '',
+  all: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,7 +24,24 @@ const reducer = (state = initialState, action) => {
       };
 
     case actionTypes.ADD_POST_FAILURE:
-      return updateState(state, { retrievePostError: action.payload.retrievePostError });
+      return updateState(state, {
+        retrievePostError: action.payload.retrievePostError
+      });
+
+    case actionTypes.RETRIEVE_POSTS_PENDING_STATUS:
+      return updateState(state, {
+        retrievePostsIsPending: action.payload.isPending
+      });
+
+    case actionTypes.RETRIEVE_POSTS_SUCCESS:
+      return updateState(state, {
+        all: action.payload.posts
+      });
+
+    case actionTypes.RETRIEVE_POSTS_FAILURE:
+      return updateState(state, {
+        retrievePostsError: action.payload.retrievePostsError
+      });
 
     default:
       return state;
