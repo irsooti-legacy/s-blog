@@ -14,7 +14,10 @@ class Home extends Component {
           <div className="hero-body">
             <div className="container">
               <h1 className="title">
-                <span className="has-text-weight-bold is-size-1">SuperSimpliest blog</span><br />
+                <span className="has-text-weight-bold is-size-1">
+                  SuperSimpliest blog
+                </span>
+                <br />
                 <span className="is-size-4 has-text-white">in the world</span>
               </h1>
             </div>
@@ -46,7 +49,9 @@ const mapStateToProps = state => {
           text: state.posts.all[key][subKey].post.text,
           title: state.posts.all[key][subKey].post.title
         });
+        return true;
       });
+      return true;
     });
     return posts;
   };
