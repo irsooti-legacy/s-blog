@@ -56,52 +56,54 @@ class Login extends Component {
           </div>
         </section>
         <form onSubmit={this.onFormValidation}>
-          <div style={{ marginTop: '1em' }} class="columns is-mobile">
-            <div class="column is-3 is-offset-4">
-              <div className="field">
-                <p className="control has-icons-left has-icons-right">
-                  <input
-                    className="input"
-                    type="email"
-                    placeholder="Email"
-                    value={this.state.user}
-                    onChange={this.handleCredential('user')}
-                  />
-                  <span className="icon is-small is-left">
-                    <i className="fas fa-envelope" />
-                  </span>
-                  <span className="icon is-small is-right">
-                    <i
-                      className={`fas ${
-                        this.state.userIsValid ? 'fa-check' : 'fa-times'
-                      }`}
+          <div className="container" style={{ padding: 15 }}>
+            <div style={{ marginTop: '1em' }} class="columns is-mobile">
+              <div class="column is-3 is-offset-4">
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      type="email"
+                      placeholder="Email"
+                      value={this.state.user}
+                      onChange={this.handleCredential('user')}
                     />
-                  </span>
-                </p>
-              </div>
-              <div className="field">
-                <p className="control has-icons-left">
-                  <input
-                    className="input"
-                    type="password"
-                    value={this.state.pass}
-                    placeholder="Password"
-                    onChange={this.handleCredential('pass')}
-                  />
-                  <span className="icon is-small is-left">
-                    <i className="fas fa-lock" />
-                  </span>
-                </p>
-              </div>
-              <div className="field">
-                <p className="control">
-                  <button
-                    type="submit"
-                    className={`button is-success ${isAuthenticatingClasses}`}
-                  >
-                    Login
-                  </button>
-                </p>
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-envelope" />
+                    </span>
+                    <span className="icon is-small is-right">
+                      <i
+                        className={`fas ${
+                          this.state.userIsValid ? 'fa-check' : 'fa-times'
+                        }`}
+                      />
+                    </span>
+                  </p>
+                </div>
+                <div className="field">
+                  <p className="control has-icons-left">
+                    <input
+                      className="input"
+                      type="password"
+                      value={this.state.pass}
+                      placeholder="Password"
+                      onChange={this.handleCredential('pass')}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-lock" />
+                    </span>
+                  </p>
+                </div>
+                <div className="field">
+                  <p className="control">
+                    <button
+                      type="submit"
+                      className={`button is-success ${isAuthenticatingClasses}`}
+                    >
+                      Login
+                    </button>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
