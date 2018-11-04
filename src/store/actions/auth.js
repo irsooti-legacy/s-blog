@@ -29,9 +29,10 @@ export const setSignupStatus = isPending => {
   };
 };
 
-export const signupFail = () => {
+export const signupFail = error => {
   return {
-    type: actionTypes.SIGN_UP_FAILURE
+    type: actionTypes.SIGN_UP_FAILURE,
+    payload: { error }
   };
 };
 
@@ -53,9 +54,10 @@ export const setAuthenticationStatus = isPending => {
   };
 };
 
-export const authenticationFail = () => {
+export const authenticationFail = error => {
   return {
-    type: actionTypes.AUTHENTICATION_FAIL
+    type: actionTypes.AUTHENTICATION_FAIL,
+    payload: { error }
   };
 };
 

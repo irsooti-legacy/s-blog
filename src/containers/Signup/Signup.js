@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { validateEmail } from '../../utils/common';
 import { Redirect } from 'react-router-dom';
 import { beginSignUp } from '../../store/actions/auth';
+import { toast } from 'react-toastify';
 
 class Signup extends Component {
   state = {
@@ -40,24 +41,32 @@ class Signup extends Component {
     this.onAuthenticate();
   };
 
+  componentDidUpdate(prevProps) {
+    if (this.props.error !== prevProps.error && this.props.error !== null) {
+      toast.error('😢 ' + this.props.error, {
+        position: toast.POSITION.BOTTOM_RIGHT
+      });
+    }
+  }
+
   render() {
     let isAuthenticatingClasses = this.props.isPending ? 'is-loading' : '';
     let notAuthenticatedFragment = (
       <React.Fragment>
-        <section class="hero is-medium is-info">
-          <div class="hero-body">
-            <div class="container">
-              <h1 class="title">Sign up</h1>
-              <h2 class="subtitle">
+        <section className="hero is-medium is-info">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">Sign up</h1>
+              <h2 className="subtitle">
                 Start <strong>your stories!</strong>
               </h2>
             </div>
           </div>
         </section>
         <form onSubmit={this.onFormSubmit}>
-          <div className="container" style={{padding: 15}}>
-            <div style={{ marginTop: '1em' }} class="columns is-desktop is-5">
-              <div class="column is-3 is-offset-4">
+          <div className="container" style={{ padding: 15 }}>
+            <div style={{ marginTop: '1em' }} className="columns is-desktop is-5">
+              <div className="column is-3 is-offset-4">
                 <div className="field">
                   <p className="control has-icons-left has-icons-right">
                     <input
@@ -130,7 +139,8 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   user: state.auth.user,
   isAuthenticated: state.auth.isAuthenticated,
-  isPending: state.auth.isSigninUp
+  isPending: state.auth.isSigninUp,
+  error: state.auth.signupError
 });
 
 export default connect(

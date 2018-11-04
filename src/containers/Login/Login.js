@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { beginAuthentication } from '../../store/actions/auth';
 import { validateEmail } from '../../utils/common';
 import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 class Login extends Component {
   state = {
@@ -40,6 +41,14 @@ class Login extends Component {
     console.log(evt);
     this.onAuthenticate();
   };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.error !== prevProps.error && this.props.error !== null) {
+      toast.error('😢 ' + this.props.error, {
+        position: toast.POSITION.BOTTOM_RIGHT
+      });
+    }
+  }
 
   render() {
     let isAuthenticatingClasses = this.props.isPending ? 'is-loading' : '';
@@ -131,7 +140,8 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   user: state.auth.user,
   isAuthenticated: state.auth.isAuthenticated,
-  isPending: state.auth.isPending
+  isPending: state.auth.isPending,
+  error: state.auth.signinError
 });
 
 export default connect(

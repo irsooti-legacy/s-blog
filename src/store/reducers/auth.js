@@ -5,11 +5,15 @@ const initialState = {
   isPending: false,
   isSigninUp: false,
   isAuthenticated: false,
+  signupError: null,
+  signinError: null,
   user: {}
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.SIGN_UP_FLOW:
+      return updateState(state, { signupError: null });
     case actionTypes.SIGN_UP_SUCCESS:
     case actionTypes.AUTHENTICATION_SUCCESS:
       return updateState(state, {
@@ -20,9 +24,15 @@ const reducer = (state = initialState, action) => {
         }
       });
     case actionTypes.SIGN_UP_FAILURE:
+      return updateState(state, {
+        isAuthenticated: false,
+        signupError: action.payload.error
+      });
+
     case actionTypes.AUTHENTICATION_FAIL:
       return updateState(state, {
-        isAuthenticated: false
+        isAuthenticated: false,
+        signinError: action.payload.error
       });
 
     case actionTypes.LOGOUT:
@@ -35,7 +45,9 @@ const reducer = (state = initialState, action) => {
       return updateState(state, { isPending: action.payload.isPending });
 
     case actionTypes.SIGN_UP_PENDING:
-      return updateState(state, { isSigninUp: action.payload.isPending });
+      return updateState(state, {
+        isSigninUp: action.payload.isPending
+      });
 
     default:
       return state;

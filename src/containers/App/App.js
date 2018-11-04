@@ -48,7 +48,7 @@ class App extends Component {
           <footer className="footer" style={{ marginTop: 10 }}>
             <div className="content has-text-centered">
               <p>
-                <strong>SBLOG</strong> by sto cazzo 💗
+                <strong>SBLOG</strong> with 💗
               </p>
             </div>
           </footer>

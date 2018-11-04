@@ -11,8 +11,8 @@ export const postAuthentication = (email, password) => {
     .then(({ data }) => {
       return data;
     })
-    .catch(err => {
-      console.warn('Firebase auth failed', err);
+    .catch(({ response }) => {
+      return response.data;
     });
 };
 
@@ -28,8 +28,8 @@ export const postVerifyToken = refreshToken => {
     .then(({ data }) => {
       return data;
     })
-    .catch(err => {
-      console.warn('Firebase re-auth failed', err);
+    .catch(({ response }) => {
+      return response.data;
     });
 };
 
@@ -41,5 +41,7 @@ export const signUp = (email, password) => {
       { email, password, returnSecureToken: true }
     )
     .then(({ data }) => data)
-    .catch(err => err);
+    .catch(({ response }) => {
+      return response.data;
+    });
 };

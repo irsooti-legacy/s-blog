@@ -11,13 +11,19 @@ export function* authenticationWorker(action) {
       action.payload.email,
       action.payload.password
     );
+
+    console.log(response.error, 'ERROR')
+    if (response.error) {
+      throw new Error(response.error.message);
+    }
+
     yield localStorage.setItem('refreshToken', response.refreshToken);
     yield localStorage.setItem('username', response.email);
     yield localStorage.setItem('token', response.idToken);
     yield localStorage.setItem('localId', response.localId);
     yield put(auth.authenticationSuccess(response.email));
   } catch (err) {
-    yield put(auth.authenticationFail());
+    yield put(auth.authenticationFail(err.message));
     yield localStorage.removeItem('refreshToken');
     yield localStorage.removeItem('username');
     yield localStorage.removeItem('token');
@@ -35,13 +41,18 @@ export function* signupWorker(action) {
       action.payload.email,
       action.payload.password
     );
+
+    if (response.error) {
+      throw new Error(response.error.message);
+    }
+
     yield localStorage.setItem('refreshToken', response.refreshToken);
     yield localStorage.setItem('username', response.email);
     yield localStorage.setItem('token', response.idToken);
     yield localStorage.setItem('localId', response.localId);
     yield put(auth.signupSuccess(response.email));
   } catch (err) {
-    yield put(auth.signupFail());
+    yield put(auth.signupFail(err.message));
     yield localStorage.removeItem('refreshToken');
     yield localStorage.removeItem('username');
     yield localStorage.removeItem('token');
