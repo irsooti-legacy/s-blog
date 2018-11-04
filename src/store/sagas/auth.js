@@ -1,5 +1,5 @@
 import { put, call } from 'redux-saga/effects';
-import { postAuthentication, postVerifyToken } from '../../api/auth';
+import { postAuthentication, postVerifyToken, signUp } from '../../api/auth';
 import * as auth from '../actions/auth';
 
 export function* authenticationWorker(action) {
@@ -27,6 +27,30 @@ export function* authenticationWorker(action) {
   }
 }
 
+export function* signupWorker(action) {
+  yield put(auth.setSignupStatus(true));
+  try {
+    let response = yield call(
+      signUp,
+      action.payload.email,
+      action.payload.password
+    );
+    yield localStorage.setItem('refreshToken', response.refreshToken);
+    yield localStorage.setItem('username', response.email);
+    yield localStorage.setItem('token', response.idToken);
+    yield localStorage.setItem('localId', response.localId);
+    yield put(auth.signupSuccess(response.email));
+  } catch (err) {
+    yield put(auth.signupFail());
+    yield localStorage.removeItem('refreshToken');
+    yield localStorage.removeItem('username');
+    yield localStorage.removeItem('token');
+    yield localStorage.removeItem('localId');
+  } finally {
+    yield put(auth.setSignupStatus(false));
+  }
+}
+
 export function* verifyTokenWorker(action) {
   yield put(auth.tokenIsVerifying(true));
 
@@ -50,4 +74,11 @@ export function* verifyTokenWorker(action) {
   } finally {
     yield put(auth.tokenIsVerifying(false));
   }
+}
+
+export function* logoutWorker() {
+  yield localStorage.removeItem('refreshToken');
+  yield localStorage.removeItem('token');
+  yield localStorage.removeItem('username');
+  yield put(auth.logout());
 }

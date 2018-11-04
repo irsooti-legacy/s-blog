@@ -57,24 +57,27 @@ class NewPost extends Component {
             </div>
           </div>
         </section>
-        <div style={{ marginTop: '1em' }} className="columns is-mobile">
-          <div className="column is-7 is-offset-1">
-            <ReactQuill
-              value={this.state.text}
-              onChange={this.handleChangeArticle}
-            />
-          </div>
-          <div style={{ marginTop: '1em' }} className="column is-3">
-            <button
-              onClick={this.addPostHandler}
-              className={
-                'button is-primary is-large is-fullwidth ' +
-                this.showIsPostingLoader()
-              }
-            >
-              Post it!
-            </button>
-          </div>
+        {/* <div style={{ marginTop: '1em' }} className="columns is-mobile"> */}
+
+        <ReactQuill
+          value={this.state.text}
+          onChange={this.handleChangeArticle}
+        />
+
+        <div
+          style={{ marginTop: '1em', textAlign: 'right' }}
+          className="column is-3"
+        >
+          <button
+            onClick={this.addPostHandler}
+            className={
+              'button is-primary is-large is-fullwidth ' +
+              this.showIsPostingLoader()
+            }
+          >
+            Post it!
+          </button>
+          {/* </div> */}
         </div>
       </div>
     );

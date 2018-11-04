@@ -29,6 +29,17 @@ export const postVerifyToken = refreshToken => {
       return data;
     })
     .catch(err => {
-      console.warn('Firebase re-auth failed', err)
+      console.warn('Firebase re-auth failed', err);
     });
+};
+
+export const signUp = (email, password) => {
+  return axios
+    .post(
+      'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=' +
+        FIREBASE_API_KEY,
+      { email, password, returnSecureToken: true }
+    )
+    .then(({ data }) => data)
+    .catch(err => err);
 };

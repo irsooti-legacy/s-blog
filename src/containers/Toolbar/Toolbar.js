@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import UserDropdown from '../../components/UserDropdown/UserDropdown';
+import { logoutFlow } from '../../store/actions/auth';
 
 class Toolbar extends Component {
   state = {
-    showMobileNavbar: false
+    showMobileNavbar: false,
+    dropdownUserIsVisible: false
+  };
+
+  dropDownUserHandler = evt => {
+    this.setState(prevState => ({
+      dropdownUserIsVisible: !prevState.dropdownUserIsVisible
+    }));
   };
 
   onBurgerButtonClick = evt => {
@@ -21,17 +30,13 @@ class Toolbar extends Component {
     }
   };
 
-  componentDidUpdate() {
-    console.log(this.props.match)
-  }
+  componentDidUpdate() {}
 
   render() {
-    const { match } = this.props;
-    console.log(match);
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a className="navbar-item" href="https://bulma.io">
+          <a className="navbar-item" href="https://github.com/irsooti/blog-experiment/tree/dev">
             <span className="is-bold">SBLOG</span>
           </a>
 
@@ -56,7 +61,7 @@ class Toolbar extends Component {
             <NavLink
               className="navbar-item"
               activeClassName="is-active"
-              exact 
+              exact
               to="/"
             >
               Home
@@ -88,14 +93,17 @@ class Toolbar extends Component {
           ) : (
             <div className="navbar-end">
               <div className="navbar-item">
-                <div className="buttons">
-                  <button className="button is-primary">
-                    <span className="icon">
-                      <i className="fas fa-user" />
-                    </span>
-                    <span>{this.props.user.email}</span>
-                  </button>
-                </div>
+                <UserDropdown
+                  visibile={this.state.dropdownUserIsVisible}
+                  username={this.props.user.email}
+                  onLogout={this.props.onLogout}
+                  onClick={this.dropDownUserHandler}
+                />
+
+                {/* <UserDropdown
+                    username={this.props.user.email}
+                    onClick={() => {}}
+                  /> */}
               </div>
             </div>
           )}
@@ -110,5 +118,14 @@ const mapStateToProps = state => {
     user: state.auth.user
   };
 };
-
-export default withRouter(connect(mapStateToProps)(Toolbar));
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogout: () => dispatch(logoutFlow())
+  };
+};
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Toolbar)
+);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { retrievePostsFlow } from '../../store/actions/posts';
-import parser from 'html-react-parser';
+import HomePosts from '../../components/HomePosts/HomePosts';
 class Home extends Component {
   componentDidMount() {
     this.props.getAllPosts();
@@ -23,16 +23,14 @@ class Home extends Component {
             </div>
           </div>
         </section>
-        <div className="container posts-distance">
-          {this.props.posts.map(post => (
-            <div key={post.id}>
-              <h3 className="has-text-weight-bold has-text-dark is-size-2">
-                {post.title}
-              </h3>
-              <article>{parser(post.text)}</article>
-            </div>
-          ))}
-        </div>
+        <section
+          style={{ marginTop: '1em' }}
+          className="homepost-articles"
+        >
+          <div className="container posts-distance">
+            <HomePosts posts={this.props.posts} />
+          </div>
+        </section>
       </>
     );
   }
@@ -42,12 +40,13 @@ const mapStateToProps = state => {
   let postsToArray = () => {
     let posts = [];
     Object.keys(state.posts.all).map((key, i) => {
-      console.warn(state.posts.all[key]);
       Object.keys(state.posts.all[key]).map((subKey, subI) => {
+        console.log(state.posts.all[key][subKey])
         posts.push({
           id: subKey,
-          text: state.posts.all[key][subKey].post.text,
-          title: state.posts.all[key][subKey].post.title
+          text: state.posts.all[key][subKey].text,
+          title: state.posts.all[key][subKey].title,
+          timestamp: state.posts.all[key][subKey].timestamp,
         });
         return true;
       });

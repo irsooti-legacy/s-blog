@@ -10,6 +10,7 @@ import Home from '../Home/Home';
 import Signup from '../Signup/Signup';
 import NewPost from '../NewPost/NewPost';
 import { toast, ToastContainer } from 'react-toastify';
+import NotFound from '../../components/NotFound/NotFound';
 
 class App extends Component {
   state = {
@@ -24,7 +25,7 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.user !== null) {
+    if (this.props.user !== null && this.props.user === {}) {
       toast.success('You are in bro! 💪', {
         position: toast.POSITION.BOTTOM_RIGHT
       });
@@ -41,9 +42,10 @@ class App extends Component {
             <Route path="/login/" component={Login} />
             <Route path="/signup/" component={Signup} />
             <Route path="/newpost/" component={withAuthentication(NewPost)} />
+            <Route component={NotFound}></Route>
           </Switch>
           <ToastContainer />
-          <footer className="footer" style={{marginTop: 10}}>
+          <footer className="footer" style={{ marginTop: 10 }}>
             <div className="content has-text-centered">
               <p>
                 <strong>SBLOG</strong> by sto cazzo 💗

@@ -10,7 +10,8 @@ export const addNewPost = (token, localId, post) => {
     .post(
       `${FIREBASE_API_ENDPOINT}/posts/${localId}.json`,
       {
-        post
+        ...post,
+        timestamp: new Date()
       },
       config
     )

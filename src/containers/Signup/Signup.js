@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { validateEmail } from '../../utils/common';
 import { Redirect } from 'react-router-dom';
-import { beginAuthentication } from '../../store/actions/auth';
-
+import { beginSignUp } from '../../store/actions/auth';
 
 class Signup extends Component {
   state = {
@@ -36,6 +35,11 @@ class Signup extends Component {
     }
   };
 
+  onFormSubmit = evt => {
+    evt.preventDefault();
+    this.onAuthenticate();
+  };
+
   render() {
     let isAuthenticatingClasses = this.props.isPending ? 'is-loading' : '';
     let notAuthenticatedFragment = (
@@ -50,55 +54,59 @@ class Signup extends Component {
             </div>
           </div>
         </section>
-        <div style={{ marginTop: '1em' }} class="columns is-mobile">
-          <div class="column is-3 is-offset-4">
-            <div className="field">
-              <p className="control has-icons-left has-icons-right">
-                <input
-                  className="input"
-                  type="email"
-                  placeholder="Email"
-                  value={this.state.user}
-                  onChange={this.handleCredential('user')}
-                />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-envelope" />
-                </span>
-                <span className="icon is-small is-right">
-                  <i
-                    className={`fas ${
-                      this.state.userIsValid ? 'fa-check' : 'fa-times'
-                    }`}
-                  />
-                </span>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control has-icons-left">
-                <input
-                  className="input"
-                  type="password"
-                  value={this.state.pass}
-                  placeholder="Password"
-                  onChange={this.handleCredential('pass')}
-                />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-lock" />
-                </span>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control">
-                <button
-                  onClick={this.onAuthenticate}
-                  className={`button is-success ${isAuthenticatingClasses}`}
-                >
-                  Login
-                </button>
-              </p>
+        <form onSubmit={this.onFormSubmit}>
+          <div className="container" style={{padding: 15}}>
+            <div style={{ marginTop: '1em' }} class="columns is-desktop is-5">
+              <div class="column is-3 is-offset-4">
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      type="email"
+                      placeholder="Email"
+                      value={this.state.user}
+                      onChange={this.handleCredential('user')}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-envelope" />
+                    </span>
+                    <span className="icon is-small is-right">
+                      <i
+                        className={`fas ${
+                          this.state.userIsValid ? 'fa-check' : 'fa-times'
+                        }`}
+                      />
+                    </span>
+                  </p>
+                </div>
+                <div className="field">
+                  <p className="control has-icons-left">
+                    <input
+                      className="input"
+                      type="password"
+                      value={this.state.pass}
+                      placeholder="Password"
+                      onChange={this.handleCredential('pass')}
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-lock" />
+                    </span>
+                  </p>
+                </div>
+                <div className="field">
+                  <p className="control">
+                    <button
+                      onClick={this.onAuthenticate}
+                      className={`button is-success ${isAuthenticatingClasses}`}
+                    >
+                      Register
+                    </button>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </React.Fragment>
     );
     let authenticatedFragment = (
@@ -116,13 +124,13 @@ class Signup extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  authenticate: (user, pass) => dispatch(beginAuthentication(user, pass))
+  authenticate: (user, pass) => dispatch(beginSignUp(user, pass))
 });
 
 const mapStateToProps = state => ({
   user: state.auth.user,
   isAuthenticated: state.auth.isAuthenticated,
-  isPending: state.auth.isPending
+  isPending: state.auth.isSigninUp
 });
 
 export default connect(

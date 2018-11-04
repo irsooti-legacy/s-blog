@@ -10,5 +10,16 @@
 }
 
 .new-post .ql-container.ql-snow {
+  border: none !important
+}
+
+.ql-editor {
   min-height: 60vh;
 }
+
+.ql-toolbar.ql-snow {
+  border-right: none;
+  border-left: none
+}
+
+.ql-container .ql-snow {}

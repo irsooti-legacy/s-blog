@@ -3,19 +3,14 @@ import { updateState } from '../../utils/data';
 
 const initialState = {
   isPending: false,
+  isSigninUp: false,
   isAuthenticated: false,
   user: {}
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    // case actionTypes.AUTHENTICATION_FLOW:
-    //   return updateState(state, {
-    //     credentials: {
-    //       email: action.payload.email,
-    //       password: action.payload.password
-    //     }
-    //   });
+    case actionTypes.SIGN_UP_SUCCESS:
     case actionTypes.AUTHENTICATION_SUCCESS:
       return updateState(state, {
         isAuthenticated: true,
@@ -24,13 +19,24 @@ const reducer = (state = initialState, action) => {
           ...action.payload.user
         }
       });
+    case actionTypes.SIGN_UP_FAILURE:
     case actionTypes.AUTHENTICATION_FAIL:
       return updateState(state, {
         isAuthenticated: false
       });
 
+    case actionTypes.LOGOUT:
+      return updateState(state, {
+        isAuthenticated: false,
+        user: {}
+      });
+
     case actionTypes.AUTHENTICATION_PENDING:
       return updateState(state, { isPending: action.payload.isPending });
+
+    case actionTypes.SIGN_UP_PENDING:
+      return updateState(state, { isSigninUp: action.payload.isPending });
+
     default:
       return state;
   }

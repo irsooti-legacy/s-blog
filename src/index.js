@@ -9,10 +9,13 @@ import 'bulma/css/bulma.css';
 import App from './containers/App/App';
 import * as serviceWorker from './utils/serviceWorker';
 import configureStore from './store/config';
+import moment from 'moment';
+
+
+import ('moment/locale/' + window.navigator.language);
 
 dotenv.load();
-
-console.log(process.env);
+moment.locale();
 
 ReactDOM.render(
   <Provider store={configureStore()}>
