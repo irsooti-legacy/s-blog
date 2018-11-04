@@ -14,6 +14,10 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SIGN_UP_FLOW:
       return updateState(state, { signupError: null });
+
+    case actionTypes.AUTHENTICATION_FLOW:
+      return updateState(state, { signinError: null });
+
     case actionTypes.SIGN_UP_SUCCESS:
     case actionTypes.AUTHENTICATION_SUCCESS:
       return updateState(state, {
