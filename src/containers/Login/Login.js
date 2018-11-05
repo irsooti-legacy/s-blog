@@ -66,8 +66,8 @@ class Login extends Component {
         </section>
         <form onSubmit={this.onFormValidation}>
           <div className="container" style={{ padding: 15 }}>
-            <div style={{ marginTop: '1em' }} class="columns is-mobile">
-              <div class="column is-3 is-offset-4">
+            <div style={{ marginTop: '1em' }} class="columns is-desktop is-5">
+              <div className="column is-3 is-offset-4">
                 <div className="field">
                   <p className="control has-icons-left has-icons-right">
                     <input

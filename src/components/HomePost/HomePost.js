@@ -6,7 +6,7 @@ import moment from 'moment';
 
 const HomePost = props => {
   return (
-    <div className="column is-full">
+    <div style={{padding: 25 }} className="column is-full">
       <div className="card">
         <div className="card-content">
           <div className="media">

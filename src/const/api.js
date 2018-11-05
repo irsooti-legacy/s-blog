@@ -1,2 +1,2 @@
-export const FIREBASE_API_KEY = 'AIzaSyAUe_5fJKIV0k5SAyqp9GO-FBgoLYleRvM';
-export const FIREBASE_API_ENDPOINT = 'https://sblog-175ab.firebaseio.com';
+export const FIREBASE_API_KEY = process.env.REACT_APP_FB_API;
+export const FIREBASE_API_ENDPOINT = process.env.REACT_APP_FB_ENDPOINT;
