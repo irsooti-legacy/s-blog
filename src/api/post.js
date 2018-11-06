@@ -30,3 +30,10 @@ export const getAllPosts = () => {
     .then(({ data }) => data)
     .catch(err => err);
 };
+
+export const getPostByUidAndPid = (userId, postId) => {
+  return axios
+  .get(`${FIREBASE_API_ENDPOINT}/posts/${userId}/${postId}.json`)
+  .then(({ data }) => data)
+  .catch(err => err);
+}

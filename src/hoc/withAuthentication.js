@@ -32,5 +32,12 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
+const mapDispatchToProps = dispatch => ({
+  
+});
+
 export default WrappedComponent =>
-  connect(mapStateToProps)(withAuthentication(WrappedComponent));
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(withAuthentication(WrappedComponent));

@@ -23,10 +23,7 @@ class Home extends Component {
             </div>
           </div>
         </section>
-        <section
-          style={{ marginTop: '1em' }}
-          className="homepost-articles"
-        >
+        <section  className="section">
           <div className="container posts-distance">
             <HomePosts posts={this.props.posts} />
           </div>
@@ -37,27 +34,9 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => {
-  let postsToArray = () => {
-    let posts = [];
-    Object.keys(state.posts.all).map((key, i) => {
-      Object.keys(state.posts.all[key]).map((subKey, subI) => {
-        console.log(state.posts.all[key][subKey])
-        posts.push({
-          id: subKey,
-          text: state.posts.all[key][subKey].text,
-          title: state.posts.all[key][subKey].title,
-          timestamp: state.posts.all[key][subKey].timestamp,
-        });
-        return true;
-      });
-      return true;
-    });
-    return posts;
-  };
-
   return {
     retrievePostError: state.posts.retrievePostError,
-    posts: postsToArray(),
+    posts: state.posts.all,
     postsLoadingStatus: state.posts.retrievePostsIsPending
   };
 };

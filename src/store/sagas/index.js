@@ -17,6 +17,7 @@ export function* rootSaga() {
       posts.retrievePostsWorker
     ),
     yield takeLatest(actionTypes.LOGOUT_FLOW, auth.logoutWorker),
-    yield takeLatest(actionTypes.SIGN_UP_FLOW, auth.signupWorker)
+    yield takeLatest(actionTypes.SIGN_UP_FLOW, auth.signupWorker),
+    yield takeLatest(actionTypes.RETRIEVE_POST_FLOW, posts.retrievePostWorker),
   ]);
 }

@@ -3,11 +3,18 @@ import React from 'react';
 import parser from 'html-react-parser';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import history from '../../utils/history';
+import './HomePost.css'
+
+const goToPost = (authorId, postId) => evt => {
+  console.log(authorId, postId)
+  history.push(`/${authorId}/${postId}`);
+};
 
 const HomePost = props => {
   return (
-    <div style={{padding: 25 }} className="column is-full">
-      <div className="card">
+    <div style={{ padding: 25 }} className="column is-full">
+      <div className="HomePost card" onClick={goToPost(props.authorId, props.postId)}>
         <div className="card-content">
           <div className="media">
             <div className="media-left">
@@ -28,7 +35,7 @@ const HomePost = props => {
           <div className="content">
             {parser(props.text)}
             <br />
-            <time datetime="2016-1-1">{moment(props.timestamp).fromNow()}</time>
+            <time dateTime="2016-1-1">{moment(props.timestamp).fromNow()}</time>
           </div>
         </div>
       </div>

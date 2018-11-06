@@ -19,12 +19,17 @@ const UserDropdown = props => {
         </span>
       </button>
       <div className="dropdown-menu" id="dropdown-menu3" role="menu">
-        <div class="dropdown-content">
-          <a href="noopener" class="dropdown-item">
+        <div className="dropdown-content">
+          <a href="noopener" className="dropdown-item">
             Test
           </a>
           <hr className="dropdown-divider" />
-          <a onClick={props.onLogout} rel="nofollow noopener" href="#logout" class="dropdown-item">
+          <a
+            onClick={props.onLogout}
+            rel="nofollow noopener"
+            href="#logout"
+            className="dropdown-item"
+          >
             <span className="icon">
               <i className="fas fa-lock" aria-hidden="true" />
             </span>

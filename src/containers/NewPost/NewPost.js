@@ -35,8 +35,43 @@ class NewPost extends Component {
 
   addPostHandler = () => {
     const { title, text } = this.state;
-    this.props.addPostFlow(title, text);
+
+    if (title && text) {
+      this.props.addPostFlow(title, text);
+    } else {
+      toast.error(
+        `Fill the following fields:
+       ${title ? '' : 'title'} ${text ? '' : 'text'}`,
+        {
+          position: toast.POSITION.BOTTOM_RIGHT
+        }
+      );
+    }
   };
+
+  submitPostRef = React.createRef();
+  postSectionRef = React.createRef();
+
+  rectWatcher = evt => {
+    console.log(
+      this.submitPostRef.current.offsetTop - window.pageYOffset <=
+        this.submitPostRef.current.offsetTop
+    );
+    console.log(this.submitPostRef.current.offsetTop);
+    if (window.pageYOffset <= this.submitPostRef.current.offsetBottom) {
+      console.log(window.pageYOffset);
+    }
+
+    //.getBoundingClientRect();
+  };
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.rectWatcher);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.rectWatcher);
+  }
 
   render() {
     return (
@@ -58,27 +93,35 @@ class NewPost extends Component {
           </div>
         </section>
         {/* <div style={{ marginTop: '1em' }} className="columns is-mobile"> */}
+        <section className="" ref={this.postSectionRef}>
+          <ReactQuill
+            value={this.state.text}
+            onChange={this.handleChangeArticle}
+          />
 
-        <ReactQuill
-          value={this.state.text}
-          onChange={this.handleChangeArticle}
-        />
-
-        <div
-          style={{ marginTop: '1em', textAlign: 'right' }}
-          className="column is-3"
-        >
-          <button
-            onClick={this.addPostHandler}
-            className={
-              'button is-primary is-large is-fullwidth ' +
-              this.showIsPostingLoader()
-            }
+          <div
+            ref={this.submitPostRef}
+            style={{
+              marginTop: '1em',
+              textAlign: 'right',
+              position: 'fixed',
+              right: 0,
+              bottom: '2em'
+            }}
+            className="column is-3"
           >
-            Post it!
-          </button>
-          {/* </div> */}
-        </div>
+            <button
+              onClick={this.addPostHandler}
+              className={
+                'button is-primary is-large is-fullwidth ' +
+                this.showIsPostingLoader()
+              }
+            >
+              Post it!
+            </button>
+            {/* </div> */}
+          </div>
+        </section>
       </div>
     );
   }

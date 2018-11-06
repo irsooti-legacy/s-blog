@@ -7,6 +7,44 @@ export const addPostFlow = newPost => {
   };
 };
 
+export const getPostFlow = (userId, postId) => {
+  return {
+    type: actionTypes.RETRIEVE_POST_FLOW,
+    payload: {
+      userId,
+      postId
+    }
+  };
+};
+
+export const retrievePostPendingStatus = getPostIsPending => {
+  return {
+    type: actionTypes.RETRIEVE_POST_PENDING,
+    payload: {
+      getPostIsPending
+    }
+  };
+};
+
+export const retrievePostSuccess = post => {
+  return {
+    type: actionTypes.RETRIEVE_POST_SUCCESS,
+    payload: {
+      post
+    }
+  };
+};
+
+
+export const retrievePostFailure = retrievePostError => {
+  return {
+    type: actionTypes.RETRIEVE_POST_FAILURE,
+    payload: {
+      retrievePostError
+    }
+  };
+};
+
 export const addPostSuccessfully = postIdRetrieved => {
   return {
     type: actionTypes.ADD_POST_SUCCESS,

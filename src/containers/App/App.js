@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import style from './App.css';
 import { connect } from 'react-redux';
-import { beginVerifyToken } from '../../store/actions/auth';
+import { beginVerifyToken, redirectAfterLogin } from '../../store/actions/auth';
 import Toolbar from '../Toolbar/Toolbar';
 import Login from '../Login/Login';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import withAuthentication from '../../hoc/withAuthentication';
 import Home from '../Home/Home';
 import Signup from '../Signup/Signup';
 import NewPost from '../NewPost/NewPost';
 import { toast, ToastContainer } from 'react-toastify';
 import NotFound from '../../components/NotFound/NotFound';
+import Post from '../Post/Post';
+import history from '../../utils/history';
 
 class App extends Component {
   state = {
@@ -22,6 +24,7 @@ class App extends Component {
     if (refreshToken) {
       this.props.preAuthenticate(refreshToken);
     }
+    this.props.setRedirectUrl(window.location.pathname);
   }
 
   componentDidUpdate() {
@@ -34,7 +37,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div className={style.test}>
           <Toolbar />
           <Switch>
@@ -42,7 +45,8 @@ class App extends Component {
             <Route path="/login/" component={Login} />
             <Route path="/signup/" component={Signup} />
             <Route path="/newpost/" component={withAuthentication(NewPost)} />
-            <Route component={NotFound}></Route>
+            <Route path="/:userId/:postId" component={Post} />
+            <Route component={NotFound} />
           </Switch>
           <ToastContainer />
           <footer className="footer" style={{ marginTop: 10 }}>
@@ -59,7 +63,8 @@ class App extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  preAuthenticate: refreshToken => dispatch(beginVerifyToken(refreshToken))
+  preAuthenticate: refreshToken => dispatch(beginVerifyToken(refreshToken)),
+  setRedirectUrl: path => dispatch(redirectAfterLogin(path))
 });
 
 const mapStateToProps = state => ({

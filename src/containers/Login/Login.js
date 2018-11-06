@@ -5,6 +5,7 @@ import { validateEmail } from '../../utils/common';
 import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+
 class Login extends Component {
   state = {
     user: '',
@@ -54,11 +55,11 @@ class Login extends Component {
     let isAuthenticatingClasses = this.props.isPending ? 'is-loading' : '';
     let notAuthenticatedFragment = (
       <React.Fragment>
-        <section class="hero is-medium is-primary">
-          <div class="hero-body">
-            <div class="container">
-              <h1 class="title">Login</h1>
-              <h2 class="subtitle">
+        <section className="hero is-medium is-primary">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">Login</h1>
+              <h2 className="subtitle">
                 Authenticate and <strong>start your stories</strong>
               </h2>
             </div>
@@ -66,7 +67,7 @@ class Login extends Component {
         </section>
         <form onSubmit={this.onFormValidation}>
           <div className="container" style={{ padding: 15 }}>
-            <div style={{ marginTop: '1em' }} class="columns is-desktop is-5">
+            <div style={{ marginTop: '1em' }} className="columns is-desktop is-5">
               <div className="column is-3 is-offset-4">
                 <div className="field">
                   <p className="control has-icons-left has-icons-right">
@@ -122,7 +123,7 @@ class Login extends Component {
     let authenticatedFragment = (
       <Redirect
         to={{
-          pathname: '/'
+          pathname: this.props.redirectUrl
         }}
       />
     );
@@ -139,6 +140,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   user: state.auth.user,
+  redirectUrl: state.auth.redirectUrl,
   isAuthenticated: state.auth.isAuthenticated,
   isPending: state.auth.isPending,
   error: state.auth.signinError

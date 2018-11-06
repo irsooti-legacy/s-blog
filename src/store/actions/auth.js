@@ -115,3 +115,12 @@ export const logoutFlow = () => {
     type: actionTypes.LOGOUT_FLOW
   };
 };
+
+export const redirectAfterLogin = path => {
+  return {
+    type: actionTypes.REDIRECT_AFTER_LOGIN,
+    payload: {
+      redirectUrl: path
+    }
+  };
+};

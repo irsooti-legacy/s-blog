@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import HomePost from '../HomePost/HomePost';
 
 const HomePosts = props => {
-  console.log(props)
-  
   return (
     <div className="columns is-multiline">
       {props.posts.map(post => (
         <HomePost
           key={post.id}
+          postId={post.id}
+          authorId={post.authorId}
           title={post.title}
           text={post.text}
           timestamp={post.timestamp}

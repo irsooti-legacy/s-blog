@@ -7,7 +7,8 @@ const initialState = {
   isAuthenticated: false,
   signupError: null,
   signinError: null,
-  user: {}
+  user: {},
+  redirectUrl: '/'
 };
 
 const reducer = (state = initialState, action) => {
@@ -51,6 +52,14 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SIGN_UP_PENDING:
       return updateState(state, {
         isSigninUp: action.payload.isPending
+      });
+
+    case actionTypes.REDIRECT_AFTER_LOGIN:
+      return updateState(state, {
+        redirectUrl:
+          action.payload.redirectUrl === '/login'
+            ? '/'
+            : action.payload.redirectUrl
       });
 
     default:
