@@ -12,9 +12,8 @@ export function* authenticationWorker(action) {
       action.payload.password
     );
 
-    console.log(response.error, 'ERROR')
-    if (response.error) {
-      throw new Error(response.error.message);
+    if (response.error_status) {
+      throw new Error(response.error_status);
     }
 
     yield localStorage.setItem('refreshToken', response.refreshToken);
@@ -42,8 +41,8 @@ export function* signupWorker(action) {
       action.payload.password
     );
 
-    if (response.error) {
-      throw new Error(response.error.message);
+    if (response.error_status) {
+      throw new Error(response.error_status);
     }
 
     yield localStorage.setItem('refreshToken', response.refreshToken);
