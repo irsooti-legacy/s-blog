@@ -79,7 +79,7 @@ class NewPost extends Component {
         <section className="hero is-light is-is-medium">
           <div className="hero-body">
             <div className="container">
-              <h6>Your title will sucks anyway</h6>
+              <h6>Your awesome title</h6>
               <h1 className="title is-size-2">
                 <input
                   placeholder="Title"
