@@ -5,6 +5,7 @@ import 'react-quill/dist/quill.snow.css'; // ES6
 import './NewPost.css';
 import { addPostFlow } from '../../store/actions/posts';
 import { toast } from 'react-toastify';
+import history from '../../utils/history';
 
 class NewPost extends Component {
   state = {
@@ -13,10 +14,18 @@ class NewPost extends Component {
   };
 
   componentDidUpdate() {
-    if (this.props.isLoading && this.props.errorMsg === '') {
+    if (
+      this.props.isLoading &&
+      this.props.errorMsg === '' &&
+      this.props.postRedirect
+    ) {
       toast.success('Post published! 🎉', {
         position: toast.POSITION.BOTTOM_RIGHT
       });
+
+      history.push(
+        `/${localStorage.getItem('localId')}/${this.props.postRedirect}`
+      );
     }
   }
 
@@ -52,27 +61,6 @@ class NewPost extends Component {
   submitPostRef = React.createRef();
   postSectionRef = React.createRef();
 
-  rectWatcher = evt => {
-    console.log(
-      this.submitPostRef.current.offsetTop - window.pageYOffset <=
-        this.submitPostRef.current.offsetTop
-    );
-    console.log(this.submitPostRef.current.offsetTop);
-    if (window.pageYOffset <= this.submitPostRef.current.offsetBottom) {
-      console.log(window.pageYOffset);
-    }
-
-    //.getBoundingClientRect();
-  };
-
-  componentDidMount() {
-    window.addEventListener('scroll', this.rectWatcher);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.rectWatcher);
-  }
-
   render() {
     return (
       <div className="new-post">
@@ -104,23 +92,22 @@ class NewPost extends Component {
             style={{
               marginTop: '1em',
               textAlign: 'right',
-              position: 'fixed',
+              position: 'sticky',
               right: 0,
               bottom: '2em'
             }}
-            className="column is-3"
+            className="column is-12"
           >
             <button
               onClick={this.addPostHandler}
               className={
-                'button is-primary is-large is-fullwidth ' +
-                this.showIsPostingLoader()
+                'button is-primary is-large ' + this.showIsPostingLoader()
               }
             >
               Post it!
             </button>
-            {/* </div> */}
           </div>
+          {/* </div> */}
         </section>
       </div>
     );
@@ -129,7 +116,8 @@ class NewPost extends Component {
 
 const mapStateToProps = state => ({
   isLoading: state.posts.addingPostIsPending,
-  errorMsg: state.posts.retrievePostError
+  errorMsg: state.posts.retrievePostError,
+  postRedirect: state.posts.postIdRetrieved
 });
 
 const mapDispatchToProps = dispatch => ({

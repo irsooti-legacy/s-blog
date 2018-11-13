@@ -4,20 +4,25 @@ import parser from 'html-react-parser';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import history from '../../utils/history';
-import './HomePost.css'
+import './HomePost.css';
 
 const goToPost = (authorId, postId) => evt => {
-  console.log(authorId, postId)
+  console.log(authorId, postId);
   history.push(`/${authorId}/${postId}`);
 };
 
 const HomePost = props => {
+  const timestamp = moment(props.timestamp);
+
   return (
     <div style={{ padding: 25 }} className="column is-full">
-      <div className="HomePost card" onClick={goToPost(props.authorId, props.postId)}>
+      <div
+        className="HomePost card"
+        onClick={goToPost(props.authorId, props.postId)}
+      >
         <div className="card-content">
           <div className="media">
-            <div className="media-left">
+            {/* <div className="media-left">
               <figure className="image is-48x48 ">
                 <img
                   className="is-rounded"
@@ -25,18 +30,20 @@ const HomePost = props => {
                   alt="Placeholder"
                 />
               </figure>
-            </div>
+            </div> */}
             <div className="media-content">
-              <p className="title is-4">{props.title}</p>
-              <p className="subtitle is-6">@anon</p>
+              <p className="title is-3">{props.title}</p>
+              <p className="subtitle is-6">
+                <time
+                  dateTime={timestamp}
+                >
+                <i className="fas fa-calendar-alt"></i> {`${timestamp.format('D/MM/Y')}`}
+                </time>
+              </p>
             </div>
           </div>
 
-          <div className="content">
-            {parser(props.text)}
-            <br />
-            <time dateTime="2016-1-1">{moment(props.timestamp).fromNow()}</time>
-          </div>
+          <div className="content">{parser(props.text)}</div>
         </div>
       </div>
     </div>
