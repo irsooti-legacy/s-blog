@@ -36,7 +36,10 @@ class Toolbar extends Component {
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a className="navbar-item" href="https://github.com/irsooti/blog-experiment/tree/dev">
+          <a
+            className="navbar-item"
+            href="https://github.com/irsooti/s-blog/tree/dev"
+          >
             <span className="is-bold">SBLOG</span>
           </a>
 
@@ -99,11 +102,6 @@ class Toolbar extends Component {
                   onLogout={this.props.onLogout}
                   onClick={this.dropDownUserHandler}
                 />
-
-                {/* <UserDropdown
-                    username={this.props.user.email}
-                    onClick={() => {}}
-                  /> */}
               </div>
             </div>
           )}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getPostFlow } from '../../store/actions/posts';
 import parser from 'html-react-parser';
+import FullpageLoader from '../../components/FullpageLoader/FullpageLoader';
 
 const PostArticle = props => {
   if (!props.text) return '';
@@ -64,7 +65,7 @@ class Post extends Component {
       />
     );
 
-    return <div>{this.props.post.text ? fragment : loading}</div>;
+    return <div>{this.props.post.text ? fragment : <FullpageLoader />}</div>;
   }
 }
 

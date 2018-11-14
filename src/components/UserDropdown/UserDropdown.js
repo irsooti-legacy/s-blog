@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const UserDropdown = props => {
   let isActiveClass = props.visibile ? 'is-active' : null;
@@ -20,9 +21,14 @@ const UserDropdown = props => {
       </button>
       <div className="dropdown-menu" id="dropdown-menu3" role="menu">
         <div className="dropdown-content">
-          <a href="noopener" className="dropdown-item">
-            Test
-          </a>
+          <NavLink
+            className="dropdown-item"
+            to="/profile"
+            onClick={props.onClick}
+            activeClassName="active"
+          >
+            Profile
+          </NavLink>
           <hr className="dropdown-divider" />
           <a
             onClick={props.onLogout}
