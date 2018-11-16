@@ -1,5 +1,4 @@
 import React from 'react';
-import dotenv from 'dotenv';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import './index.css';
@@ -14,7 +13,6 @@ import moment from 'moment';
 
 import ('moment/locale/' + window.navigator.language);
 
-dotenv.load();
 moment.locale();
 
 ReactDOM.render(
