@@ -31,7 +31,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router history={history}>
+      <Router  history={history}>
         <div className={style.test}>
           <Toolbar />
           <AppRouter />

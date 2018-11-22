@@ -1,24 +1,15 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getPostFlow } from '../../store/actions/posts';
 import parser from 'html-react-parser';
-import FullpageLoader from '../../components/FullpageLoader/FullpageLoader';
+import { Skeleton } from 'react-skeleton-placeholder';
 
 const PostArticle = props => {
   if (!props.text) return '';
   return parser(props.text);
 };
 
-PostArticle.propTypes = {
-  text: PropTypes.string
-};
-
 class Post extends Component {
-  static propTypes = {
-    prop: PropTypes
-  };
-
   componentDidMount() {
     const { postId, userId } = this.props.match.params;
     this.props.onLoadPost(userId, postId);
@@ -27,10 +18,16 @@ class Post extends Component {
   render() {
     let fragment = (
       <article>
-        <section className="hero is-medium is-primary">
+        <section className="hero is-medium is-dark">
           <div className="hero-body">
             <div className="container">
-              <h1 className="title">{this.props.post.title}</h1>
+              <h1 className="title">
+                {this.props.post.text ? (
+                  <PostArticle text={this.props.post.title} />
+                ) : (
+                  <Skeleton paragraph={32} rounded={true} rows={1} />
+                )}
+              </h1>
             </div>
           </div>
         </section>
@@ -41,7 +38,11 @@ class Post extends Component {
           >
             <div className="columns is-variable is-3">
               <div className="column">
-                <PostArticle text={this.props.post.text} />
+                {this.props.post.text ? (
+                  <PostArticle text={this.props.post.text} />
+                ) : (
+                  <Skeleton rounded={true} rows={6} />
+                )}
               </div>
             </div>
           </div>
@@ -49,23 +50,23 @@ class Post extends Component {
       </article>
     );
 
-    let loading = (
-      <div
-        style={{
-          position: 'fixed',
-          width: '100%',
-          height: '100%',
-          left: 0,
-          top: 0,
-          padding: '3em',
-          paddingTop: '20rem',
-          background: '#FFF',
-          opacity: 0.5
-        }}
-      />
-    );
+    // let loading = (
+    //   <div
+    //     style={{
+    //       position: 'fixed',
+    //       width: '100%',
+    //       height: '100%',
+    //       left: 0,
+    //       top: 0,
+    //       padding: '3em',
+    //       paddingTop: '20rem',
+    //       background: '#FFF',
+    //       opacity: 0.5
+    //     }}
+    //   />
+    // );
 
-    return <div>{this.props.post.text ? fragment : <FullpageLoader />}</div>;
+    return <div>{fragment}</div>;
   }
 }
 

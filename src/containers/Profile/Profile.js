@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { Component } from 'react';
 export default class Profile extends Component {
   render() {
@@ -18,10 +19,10 @@ export default class Profile extends Component {
                   <p class="menu-label">General</p>
                   <ul class="menu-list">
                     <li>
-                      <a className="is-active">Dashboard</a>
+                      <button className="is-active">Dashboard</button>
                     </li>
                     <li>
-                      <a className="has-text-grey-lighter">Coming soon...</a>
+                      <button className="has-text-grey-lighter">Coming soon...</button>
                     </li>
                   </ul>
                 </aside>
