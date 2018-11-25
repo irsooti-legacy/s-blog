@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { retrievePostsFlow } from '../../store/actions/posts';
+import classes from './Home.css'
 import HomePosts from '../../components/HomePosts/HomePosts';
 class Home extends Component {
   componentDidMount() {
@@ -10,7 +11,7 @@ class Home extends Component {
   render() {
     return (
       <>
-        <section className="hero is-link is-large">
+        <section className="hero is-link is-large home-pattern">
           <div className="hero-body">
             <div className="container">
               <h1 className="title">
