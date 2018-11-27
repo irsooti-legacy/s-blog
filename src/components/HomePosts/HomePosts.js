@@ -7,12 +7,13 @@ const HomePosts = props => {
     <div className="columns is-multiline">
       {props.posts.map(post => (
         <HomePost
-          key={post.id}
-          postId={post.id}
+          key={post.postId}
+          postId={post.postId}
           authorId={post.authorId}
           title={post.title}
           text={post.text}
           timestamp={post.timestamp}
+          tags={post.tags}
         />
       ))}
     </div>

@@ -11,7 +11,8 @@ const PostArticle = props => {
 
 class Post extends Component {
   componentDidMount() {
-    const { postId, userId } = this.props.match.params;
+    const { userId, postId } = this.props.match.params;
+    console.log(this.props);
     this.props.onLoadPost(userId, postId);
   }
 

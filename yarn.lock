@@ -6942,6 +6942,10 @@ raf@3.4.0:
   dependencies:
     performance-now "^2.1.0"
 
+ramda@^0.26.0:
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.0.tgz#3cbe059f5c18fbc0eb86f2396ab1f8320705424c"
+
 randomatic@^3.0.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/randomatic/-/randomatic-3.1.1.tgz#b776efc59375984e36c537b2f51a1f0aff0da1ed"
@@ -7107,7 +7111,7 @@ react-router@^4.3.1:
 
 "react-skeleton-placeholder@https://github.com/irsooti/react-skeleton-placeholder.git":
   version "0.0.0"
-  resolved "https://github.com/irsooti/react-skeleton-placeholder.git#e46a1b80cc8824b7c57f1f71f28d461199bd58ec"
+  resolved "https://github.com/irsooti/react-skeleton-placeholder.git#e714974c4b5c687307759854abba3174932b86c5"
 
 react-toastify@^4.4.0:
   version "4.4.3"
@@ -7311,7 +7315,7 @@ regjsgen@^0.4.0:
 
 regjsparser@^0.1.4:
   version "0.1.5"
-  resolved "https://registry.yarnpkg.com/regjsparser/-/regjsparser-0.1.5.tgz#7ee8f84dc6fa792d3fd0ae228d24bd949ead205c"
+  resolved "http://registry.npmjs.org/regjsparser/-/regjsparser-0.1.5.tgz#7ee8f84dc6fa792d3fd0ae228d24bd949ead205c"
   dependencies:
     jsesc "~0.5.0"
 

@@ -1,13 +1,27 @@
-.posts-distance {
+.postsDistance {
   margin-top: 2em;
 }
 
-.home-pattern {
+.homePattern {
   background: url(../../assets/home-pattern.svg);
   background-size: 250px;
   background-blend-mode: hard-light;
   position: relative;
 }
+.mainTitle {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.mainTitle h6 {
+  margin-top: 40px;
+}
+
+.mainTitle h1 span {
+  padding: 20px;
+  border-bottom: solid 2px;
+}
+
 /* 
 .home-pattern:after {
   content: "";

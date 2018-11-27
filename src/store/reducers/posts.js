@@ -11,26 +11,26 @@ const initialState = {
   all: []
 };
 
-function postsToArray(posts) {
-  let newPosts = [];
+// function postsToArray(posts) {
+//   let newPosts = [];
 
-  Object.keys(posts).map((key, i) => {
-    Object.keys(posts[key]).map((subKey, subI) => {
-      newPosts.push({
-        id: subKey,
-        authorId: key,
-        text: posts[key][subKey].text,
-        title: posts[key][subKey].title,
-        timestamp: posts[key][subKey].timestamp,
+//   Object.keys(posts).map((key, i) => {
+//     Object.keys(posts[key]).map((subKey, subI) => {
+//       newPosts.push({
+//         id: subKey,
+//         authorId: key,
+//         text: posts[key][subKey].text,
+//         title: posts[key][subKey].title,
+//         timestamp: posts[key][subKey].timestamp,
         
-      });
-      return true;
-    });
-    return true;
-  });
+//       });
+//       return true;
+//     });
+//     return true;
+//   });
 
-  return newPosts;
-}
+//   return newPosts;
+// }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -57,7 +57,7 @@ const reducer = (state = initialState, action) => {
       });
 
     case actionTypes.RETRIEVE_POSTS_SUCCESS:
-      let posts = postsToArray(action.payload.posts);
+      let posts = action.payload.posts;
       return updateState(state, {
         all: posts
       });
