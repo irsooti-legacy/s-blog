@@ -1,0 +1,16 @@
+.Title::first-letter {
+  color: hsl(48, 100%, 67%);
+  padding: 3px 10px;
+  border: solid 3px;
+  border-radius: 12px;
+  margin-right: 3px;
+}
+.Title::first-letter:hover {
+    color: hsl(12, 99%, 67%);
+    mix-blend-mode: color-burn;
+}
+
+.Title {
+  font-weight: bolder;
+  vertical-align: text-bottom;
+}

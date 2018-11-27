@@ -3,7 +3,7 @@ import { Link, NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import UserDropdown from '../../components/UserDropdown/UserDropdown';
 import { logoutFlow } from '../../store/actions/auth';
-
+import classes from './Toolbar.module.css';
 class Toolbar extends Component {
   state = {
     showMobileNavbar: false,
@@ -40,7 +40,7 @@ class Toolbar extends Component {
             className="navbar-item"
             href="https://github.com/irsooti/s-blog/tree/dev"
           >
-            <span className="is-bold">SBLOG</span>
+            <span className={'is-bold ' + classes.Title}>SBLOG</span>
           </a>
 
           <div
