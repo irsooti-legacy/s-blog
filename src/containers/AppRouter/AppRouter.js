@@ -14,7 +14,7 @@ const AppRouter = props => {
       <Route exact path="/" component={Home} />
       <Route path="/login/" component={Login} />
       <Route path="/signup/" component={Signup} />
-      <Route path="/profile/" component={Profile} />
+      <Route path="/profile/" component={withAuthentication(Profile)} />
       <Route path="/newpost/" component={withAuthentication(NewPost)} />
       <Route path="/:userId/:postId" component={Post} />
       <Route component={NotFound} />
