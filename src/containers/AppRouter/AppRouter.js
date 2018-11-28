@@ -52,7 +52,7 @@ const AppRouter = props => {
       atLeave={bounceTransition.atLeave}
       atActive={bounceTransition.atActive}
       mapStyles={mapStyles}
-      className="switch-wrapper container is-fluid"
+      className="switch-wrapper"
     >
       <Route exact path="/" component={Home} />
       <Route path="/login/" component={Login} />
