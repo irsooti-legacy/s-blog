@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { FIREBASE_API_ENDPOINT } from '../const/api';
-import { addPostIdToAllPosts, orderByDatetimeDesc, getProp } from '../utils/data';
+import {
+  addPostIdToAllPosts,
+  orderByDatetimeDesc,
+  getProp
+} from '../utils/data';
 
 export const addNewPost = (token, localId, post) => {
   const config = {
@@ -26,6 +30,7 @@ export const addNewPost = (token, localId, post) => {
 };
 
 export const getAllPosts = () => {
+
   return axios
     .get(`${FIREBASE_API_ENDPOINT}/posts.json`)
     .then(getProp('data'))

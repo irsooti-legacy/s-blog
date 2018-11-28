@@ -5,6 +5,11 @@ const UserDropdown = props => {
   let isActiveClass = props.visibile ? 'is-active' : null;
   let angleDirectionClass = props.visibile ? 'up' : 'down';
 
+  const onClick = () => {
+    props.onLogout();
+    props.onClick();
+  };
+
   return (
     <div className={'buttons dropdown ' + isActiveClass}>
       <button onClick={props.onClick} className="button is-primary">
@@ -31,7 +36,7 @@ const UserDropdown = props => {
           </NavLink>
           <hr className="dropdown-divider" />
           <a
-            onClick={props.onLogout}
+            onClick={onClick}
             rel="nofollow noopener"
             href="#logout"
             className="dropdown-item"

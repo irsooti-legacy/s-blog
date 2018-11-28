@@ -22,14 +22,6 @@ class Toolbar extends Component {
     }));
   };
 
-  isBurgerBarFocused = () => {
-    if (this.state.showMobileNavbar) {
-      return 'is-active';
-    } else {
-      return '';
-    }
-  };
-
   componentDidUpdate() {}
 
   render() {
@@ -44,7 +36,9 @@ class Toolbar extends Component {
           </a>
 
           <div
-            className={`navbar-burger burger ${this.isBurgerBarFocused()}`}
+            className={`navbar-burger burger ${
+              this.state.showMobileNavbar ? 'is-active' : ''
+            }`}
             aria-label="menu"
             aria-expanded="false"
             data-target="navbarBasicExample"
@@ -58,7 +52,9 @@ class Toolbar extends Component {
 
         <div
           id="basicblogNavbar"
-          className={`navbar-menu ${this.isBurgerBarFocused()}`}
+          className={`navbar-menu ${
+            this.state.showMobileNavbar ? 'is-active' : ''
+          }`}
         >
           <div className="navbar-start">
             <NavLink

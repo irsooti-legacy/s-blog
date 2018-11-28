@@ -1,8 +1,16 @@
 .navbar-item.is-active {
-    background-color: #fafafa;
-    color: #3273dc !important;
+  background-color: #fafafa;
+  color: #3273dc !important;
 }
 
 body {
-    color: #2B2b2b
+  color: #2b2b2b;
+}
+.switch-wrapper {
+  position: relative;
+}
+
+.switch-wrapper > div {
+  position: absolute;
+  width: 100%;
 }

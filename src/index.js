@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import initFirebase from './api/firebase';
 import { Provider } from 'react-redux';
 import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,9 +11,8 @@ import * as serviceWorker from './utils/serviceWorker';
 import configureStore from './store/config';
 import moment from 'moment';
 
-
-import ('moment/locale/' + window.navigator.language);
-
+import('moment/locale/' + window.navigator.language);
+// initFirebase();
 moment.locale();
 
 ReactDOM.render(

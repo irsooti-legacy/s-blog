@@ -13,13 +13,13 @@ class App extends Component {
     isLoading: true
   };
 
-  componentDidMount() {
-    let refreshToken = localStorage.getItem('refreshToken');
-    if (refreshToken) {
-      this.props.preAuthenticate(refreshToken);
-    }
-    this.props.setRedirectUrl(window.location.pathname);
-  }
+  // componentDidMount() {
+  //   let refreshToken = localStorage.getItem('refreshToken');
+  //   if (refreshToken) {
+  //     this.props.preAuthenticate(refreshToken);
+  //   }
+  //   this.props.setRedirectUrl(window.location.pathname);
+  // }
 
   componentDidUpdate() {
     if (this.props.user !== null && this.props.user === {}) {
